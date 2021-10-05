@@ -7,7 +7,14 @@ output: github_document
 ```{r, echo = FALSE, message = FALSE}
 library(tidyverse)
 library(ggridges)
+
+knitr::opts_chunk$set(
+  fig.width = 8,
+  fig.asp = .6,
+  out.width = "90%"
+)
 ```
+
 
 ## Load the weather data
 
@@ -152,5 +159,13 @@ What about ridges
 weather_df %>% 
   ggplot(aes(x = tmax, y = name)) +
   geom_density_ridges(alpha = .8, scale = .8)
+```
+
+## Embedding plots
+
+```{r, fig.width = 12, fig.height = 5}
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = .3)
 ```
 
