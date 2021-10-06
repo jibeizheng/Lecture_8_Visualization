@@ -120,6 +120,12 @@ weather_df %>%
 
 hexbin
 
+```{r}
+ggplot(weather_df, aes(x = tmax, y = tmin)) + 
+  geom_hex()
+```
+
+
 ## Univariate plots
 
 ```{r}
