@@ -229,3 +229,42 @@ weather_df %>%
     ## 1 CentralPark_NY    4.45
     ## 2 Waikiki_HA        1.23
     ## 3 Waterhole_WA      3.13
+
+## Limitations
+
+What if my “summary” is a linear model …
+
+Well, that doesn’t work.
+
+``` r
+weather_df %>% 
+  group_by(name) %>% 
+  summarize(cor_tmin_tmax = cor(tmin, tmax, use = "complete"))
+```
+
+    ## # A tibble: 3 x 2
+    ##   name           cor_tmin_tmax
+    ##   <chr>                  <dbl>
+    ## 1 CentralPark_NY         0.955
+    ## 2 Waikiki_HA             0.638
+    ## 3 Waterhole_WA           0.939
+
+``` r
+weather_df %>% 
+  filter(name == "CentralPark_NY") %>% 
+  lm(tmax ~ tmin, data = .) ##linear model
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = tmax ~ tmin, data = .)
+    ## 
+    ## Coefficients:
+    ## (Intercept)         tmin  
+    ##       7.209        1.039
+
+``` r
+# weather_df %>% 
+#   group_by(name) %>% 
+#   summarize(lm = lm(tmax ~ tmin))
+```

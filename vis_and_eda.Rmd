@@ -145,3 +145,24 @@ weather_df %>%
   summarize(diff_sd = sd(tmax_diff, na.rm = TRUE))
 ```
 
+## Limitations
+
+What if my "summary" is a linear model ...
+
+Well, that doesn't work.
+
+```{r}
+weather_df %>% 
+  group_by(name) %>% 
+  summarize(cor_tmin_tmax = cor(tmin, tmax, use = "complete"))
+
+weather_df %>% 
+  filter(name == "CentralPark_NY") %>% 
+  lm(tmax ~ tmin, data = .) ##linear model
+
+
+# weather_df %>% 
+#   group_by(name) %>% 
+#   summarize(lm = lm(tmax ~ tmin))
+```
+
